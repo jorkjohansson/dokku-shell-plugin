@@ -1,0 +1,4 @@
+[plugin]
+description = "dokku bash execute plugin"
+version = "0.13.31"
+[plugin.config]

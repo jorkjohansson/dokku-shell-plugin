@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -eo pipefail
+[[ $DOKKU_TRACE ]] && set -x
+
+cmd-execute-default() {
+  declare desc="dokku execute shell comannd"
+  declare cmd="execute"
+  local INPUTRC="$PLUGIN_ROOT/inputrc"
+  local HISTFILE=/dev/null
+
+  history -r || true
+
+
+  while true; do
+    trap '' SIGINT
+    read -rep "$ " line || {
+      echo
+      true
+      break
+    }
+    trap - SIGINT
+    $line || true
+
+  done
+}
+
+cmd-execute-default
